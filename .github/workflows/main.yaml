@@ -1,11 +1,7 @@
 name: test_ghactions
-
-# Controls when the action will run.
 on:
   schedule:
     - cron:  '*/5 * * * *'
-
-
 jobs: 
   autopng:
     runs-on: macos-latest
@@ -24,7 +20,7 @@ jobs:
     - name: Test
       run: Rscript test.R
       
- # Add new files in data folder, commit along with other modified files, push
+    # Add new files in data folder, commit along with other modified files, push
     - name: Commit files
       run: |
         git config --local user.name CarlosMunozDiaz
