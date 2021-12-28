@@ -1,0 +1,37 @@
+name: test_ghactions
+
+# Controls when the action will run.
+on:
+  schedule:
+    - cron:  '*/5 * * * *'
+
+
+jobs: 
+  autopng:
+    runs-on: macos-latest
+
+    # Load repo and install R
+    steps:
+    - uses: actions/checkout@master
+    - uses: r-lib/actions/setup-r@master
+
+    # Set-up R
+    - name: Install packages
+      run: |
+        R -e 'install.packages("tidyverse")'
+        
+    # Run R script
+    - name: Test
+      run: Rscript test.R
+      
+ # Add new files in data folder, commit along with other modified files, push
+    - name: Commit files
+      run: |
+        git config --local user.name CarlosMunozDiaz
+        git config --local user.email "carlos10md@gmail.com"
+        git add .
+        git commit -am "GH ACTION Headlines $(date)"
+        git push origin main
+      env:
+        REPO_KEY: ${{secrets.GITHUB_TOKEN}}
+        username: CarlosMunozDiaz
