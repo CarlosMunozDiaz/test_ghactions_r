@@ -4,7 +4,7 @@ on:
     - cron:  '*/5 * * * *'
 jobs: 
   autopng:
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
 
     # Load repo and install R
     steps:
